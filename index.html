@@ -3,600 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jenry Eduardo — Backend Developer</title>
+    <title>Jenry Eduardo — Software Engineer | Backend Developer</title>
     <style>
-        /* ── Reset & Base ── */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg-primary: #0B1120;
-            --bg-secondary: #111B2E;
+            --bg-secondary: #0F1729;
             --bg-card: #152238;
             --bg-card-hover: #1a2a45;
             --border-color: #1E3050;
+            --border-hover: #2a4060;
             --text-primary: #FFFFFF;
             --text-secondary: #94A3B8;
             --text-muted: #64748B;
             --accent: #3B82F6;
-            --accent-dim: rgba(59, 130, 246, 0.15);
+            --accent-hover: #2563EB;
+            --accent-dim: rgba(59, 130, 246, 0.12);
+            --success: #10B981;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
+            background-color: var(--bg-primary); color: var(--text-primary);
+            line-height: 1.6; overflow-x: hidden;
         }
+        a { text-decoration: none; color: inherit; }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ── Navigation ── */
+        /* ── Nav ── */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 1.25rem 2rem;
-            background: rgba(11, 17, 32, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(30, 48, 80, 0.5);
-            display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-            transition: all 0.3s ease;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1rem 2rem; background: rgba(11, 17, 32, 0.85);
+            backdrop-filter: blur(14px); border-bottom: 1px solid rgba(30, 48, 80, 0.4);
+            display: flex; justify-content: center; gap: 2rem; transition: all 0.3s ease;
         }
-
         nav a {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            letter-spacing: 0.05em;
-            transition: color 0.3s ease;
+            color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.06em;
+            text-transform: uppercase; transition: color 0.3s ease; position: relative;
         }
+        nav a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 1px; background: var(--accent); transition: width 0.3s ease;
+        }
+        nav a:hover { color: var(--text-primary); }
+        nav a:hover::after { width: 100%; }
 
-        nav a:hover {
-            color: var(--text-primary);
-        }
+        /* ── Shared ── */
+        section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+        .section-title { font-size: 1.75rem; font-weight: 600; text-align: center; margin-bottom: 1rem; }
+        .section-subtitle { text-align: center; color: var(--text-muted); font-size: 0.9rem; max-width: 500px; margin: 0 auto 3rem; }
+        .section-title-left { display: flex; align-items: center; gap: 0.75rem; font-size: 1.5rem; font-weight: 600; margin-bottom: 1.75rem; }
+        .icon-box { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); }
+        .divider { width: 48px; height: 2px; background: var(--accent); margin: 0 auto 2rem; border-radius: 1px; }
 
-        /* ── Hero Section ── */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-        }
+        /* ── Hero ── */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+        .hero-icon { width: 56px; height: 56px; margin-bottom: 2rem; opacity: 0.35; animation: fadeInDown 0.8s ease forwards; }
+        .hero-icon svg { width: 100%; height: 100%; }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; animation: fadeInUp 0.8s ease 0.2s both; }
+        .hero .role { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 0.25rem; animation: fadeInUp 0.8s ease 0.3s both; }
+        .hero .role span { color: var(--accent); }
+        .hero .specialty { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; animation: fadeInUp 0.8s ease 0.4s both; }
+        .hero .tagline { font-size: 0.95rem; color: var(--text-muted); max-width: 480px; margin-bottom: 2.5rem; line-height: 1.7; animation: fadeInUp 0.8s ease 0.5s both; }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeInUp 0.8s ease 0.65s both; }
 
-        .hero-icon {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 2rem;
-            opacity: 0.4;
-            animation: fadeInDown 0.8s ease forwards;
-        }
+        .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; background: var(--accent); color: #fff; font-size: 0.85rem; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .btn-primary svg { width: 16px; height: 16px; }
+        .btn-outline { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.85rem; background: transparent; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; }
+        .btn-outline:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+        .btn-outline svg { width: 16px; height: 16px; }
 
-        .hero-icon svg {
-            width: 100%;
-            height: 100%;
-        }
+        /* ── About ── */
+        .about-content { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem 2.25rem; color: var(--text-secondary); font-size: 0.92rem; line-height: 1.85; }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
+        /* ── Tech ── */
+        .tech-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.85rem; }
+        .tech-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem 0.75rem; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; transition: all 0.3s ease; }
+        .tech-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+        .tech-card .tech-icon { width: 28px; height: 28px; color: var(--text-secondary); }
+        .tech-card .tech-icon svg { width: 100%; height: 100%; }
+        .tech-card span { font-size: 0.8rem; color: var(--text-secondary); }
 
-        .hero .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease 0.35s both;
-        }
+        /* ── Projects ── */
+        .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .project-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.75rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; transition: all 0.3s ease; }
+        .project-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-3px); }
+        .project-card .project-icon { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-secondary); }
+        .project-card h3 { font-size: 1.05rem; font-weight: 600; }
+        .project-card .project-problem { font-size: 0.82rem; color: var(--accent); font-style: italic; }
+        .project-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+        .project-card .project-role { font-size: 0.82rem; color: var(--text-secondary); }
+        .project-card .project-impact { font-size: 0.8rem; color: var(--success); display: flex; align-items: center; gap: 0.35rem; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+        .project-tags span { padding: 0.25rem 0.6rem; border: 1px solid var(--border-color); border-radius: 3px; font-size: 0.7rem; color: var(--text-muted); }
+        .project-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.5rem; transition: color 0.3s; }
+        .project-link:hover { color: var(--accent); }
+        .project-link svg { width: 14px; height: 14px; transition: transform 0.3s; }
+        .project-link:hover svg { transform: translateX(3px); }
 
-        .hero .tagline {
-            font-size: 1rem;
-            color: var(--text-muted);
-            max-width: 520px;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-            animation: fadeInUp 0.8s ease 0.5s both;
-        }
+        /* ── Timeline ── */
+        .timeline { position: relative; max-width: 850px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 1px; background: var(--border-color); }
+        .timeline-item { position: relative; width: 45%; margin-bottom: 2.5rem; }
+        .timeline-item:nth-child(odd) { margin-left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { margin-left: 55%; text-align: left; }
+        .timeline-dot { position: absolute; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; border: 1px solid var(--border-color); background: var(--bg-primary); z-index: 2; }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -6%; transform: translate(50%, -50%); }
+        .timeline-item:nth-child(even) .timeline-dot { left: -6%; transform: translate(-50%, -50%); }
+        .timeline-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem 1.75rem; transition: all 0.3s; }
+        .timeline-card:hover { background: var(--bg-card-hover); }
+        .timeline-card .year { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .timeline-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .timeline-card .company { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.6rem; }
+        .exp-details { list-style: none; padding: 0; }
+        .exp-details li { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; padding: 0.15rem 0; display: flex; align-items: baseline; gap: 0.4rem; }
+        .timeline-item:nth-child(odd) .exp-details li { justify-content: flex-end; }
+        .exp-details li::before { content: '·'; color: var(--accent); font-weight: bold; }
+        .timeline-item:nth-child(odd) .exp-details li::before { order: 1; }
 
-        .btn-outline {
-            display: inline-block;
-            padding: 0.85rem 2.25rem;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            letter-spacing: 0.04em;
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease 0.65s both;
-            cursor: pointer;
-            background: transparent;
-        }
+        /* ── Skills ── */
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .skill-category { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.75rem 1.5rem; }
+        .skill-category h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-list span { padding: 0.35rem 0.75rem; background: var(--accent-dim); border: 1px solid rgba(59,130,246,0.2); border-radius: 4px; font-size: 0.78rem; color: var(--text-secondary); }
 
-        .btn-outline:hover {
-            border-color: var(--text-secondary);
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.03);
-        }
+        /* ── GitHub ── */
+        .github-section { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 2.5rem; text-align: center; }
+        .github-section .gh-icon { margin-bottom: 1.25rem; color: var(--text-secondary); }
+        .github-section .gh-icon svg { width: 40px; height: 40px; }
+        .github-section h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .github-section p { color: var(--text-muted); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem; line-height: 1.7; }
+        .github-stats { display: flex; justify-content: center; gap: 2.5rem; margin-bottom: 1.5rem; }
+        .github-stats .stat { text-align: center; }
+        .github-stats .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+        .github-stats .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-        /* ── Section Base ── */
-        section {
-            padding: 6rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+        /* ── Blog ── */
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .blog-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.75rem 1.5rem; transition: all 0.3s; }
+        .blog-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+        .blog-card .blog-tag { display: inline-block; padding: 0.2rem 0.6rem; background: var(--accent-dim); border: 1px solid rgba(59,130,246,0.2); border-radius: 3px; font-size: 0.7rem; color: var(--accent); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        .blog-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.6rem; line-height: 1.4; }
+        .blog-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1rem; }
+        .blog-card .read-more { font-size: 0.8rem; color: var(--accent); display: inline-flex; align-items: center; gap: 0.3rem; transition: gap 0.3s; }
+        .blog-card .read-more:hover { gap: 0.5rem; }
+        .blog-card .read-more svg { width: 12px; height: 12px; }
 
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 3rem;
-            letter-spacing: -0.01em;
-        }
+        /* ── Contact ── */
+        .contact-section { text-align: center; padding-bottom: 3rem; }
+        .contact-section h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        .contact-section .contact-desc { color: var(--text-muted); font-size: 0.9rem; max-width: 460px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .contact-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 750px; margin: 0 auto 2rem; }
+        .contact-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.75rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; transition: all 0.3s; }
+        .contact-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+        .contact-card .contact-icon { width: 24px; height: 24px; color: var(--text-secondary); }
+        .contact-card .contact-icon svg { width: 100%; height: 100%; }
+        .contact-card .contact-label { font-size: 0.82rem; color: var(--text-secondary); }
+        .contact-card .contact-value { font-size: 0.75rem; color: var(--text-muted); }
 
-        .section-title-left {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
-
-        .section-title-left .icon-box {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        /* ── About Section ── */
-        .about-content {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem 2.5rem;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.85;
-        }
-
-        /* ── Tech Stack ── */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-        }
-
-        .tech-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.75rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            transition: all 0.3s ease;
-        }
-
-        .tech-card:hover {
-            background: var(--bg-card-hover);
-            border-color: #2a4060;
-            transform: translateY(-2px);
-        }
-
-        .tech-card .tech-icon {
-            width: 32px;
-            height: 32px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tech-card .tech-icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .tech-card span {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        /* ── Featured Projects ── */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem 1.75rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            background: var(--bg-card-hover);
-            border-color: #2a4060;
-            transform: translateY(-3px);
-        }
-
-        .project-card .project-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-secondary);
-        }
-
-        .project-card h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
-        }
-
-        .project-card p {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            flex-grow: 1;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
-
-        .project-tags span {
-            padding: 0.3rem 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .project-link:hover {
-            color: var(--text-primary);
-        }
-
-        .project-link svg {
-            width: 14px;
-            height: 14px;
-            transition: transform 0.3s ease;
-        }
-
-        .project-link:hover svg {
-            transform: translateX(3px);
-        }
-
-        /* ── Experience Section ── */
-        .timeline {
-            position: relative;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: var(--border-color);
-        }
-
-        .timeline-item {
-            position: relative;
-            width: 45%;
-            padding: 0;
-            margin-bottom: 3rem;
-        }
-
-        .timeline-item:nth-child(odd) {
-            margin-left: 0;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) {
-            margin-left: 55%;
-            text-align: left;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-primary);
-            z-index: 2;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-dot {
-            right: -6%;
-            transform: translate(50%, -50%);
-        }
-
-        .timeline-item:nth-child(even) .timeline-dot {
-            left: -6%;
-            transform: translate(-50%, -50%);
-        }
-
-        .timeline-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.75rem 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-card:hover {
-            background: var(--bg-card-hover);
-        }
-
-        .timeline-card .year {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-card .company {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.75rem;
-        }
-
-        .timeline-card .description {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* ── Contact Section ── */
-        .contact-section {
-            text-align: center;
-            padding-bottom: 4rem;
-        }
-
-        .contact-section h2 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            margin-bottom: 1.25rem;
-        }
-
-        .contact-section .contact-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            max-width: 500px;
-            margin: 0 auto 3rem;
-            line-height: 1.7;
-        }
-
-        .contact-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-        }
-
-        .contact-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover {
-            background: var(--bg-card-hover);
-            border-color: #2a4060;
-            transform: translateY(-2px);
-        }
-
-        .contact-card .contact-icon {
-            width: 28px;
-            height: 28px;
-            color: var(--text-secondary);
-        }
-
-        .contact-card .contact-icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .contact-card .contact-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .contact-card .contact-value {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* ── Footer Diamond ── */
-        .footer-icon {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            opacity: 0.3;
-        }
-
-        .footer-icon svg {
-            width: 48px;
-            height: 48px;
-        }
+        /* ── Form ── */
+        .contact-form { max-width: 520px; margin: 2.5rem auto 0; text-align: left; }
+        .form-row { margin-bottom: 1rem; }
+        .form-row label { display: block; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        .form-row input, .form-row textarea { width: 100%; padding: 0.75rem 1rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.88rem; font-family: inherit; transition: border-color 0.3s; outline: none; }
+        .form-row input:focus, .form-row textarea:focus { border-color: var(--accent); }
+        .form-row textarea { resize: vertical; min-height: 100px; }
+        .form-row-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-submit { width: 100%; padding: 0.85rem; background: var(--accent); color: #fff; border: none; border-radius: 4px; font-size: 0.85rem; cursor: pointer; transition: background 0.3s; margin-top: 0.5rem; }
+        .form-submit:hover { background: var(--accent-hover); }
 
         /* ── Footer ── */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 1.5rem 2rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
+        .footer-icon { display: flex; justify-content: center; margin: 2rem 0; opacity: 0.25; }
+        .footer-icon svg { width: 40px; height: 40px; }
+        footer { border-top: 1px solid var(--border-color); padding: 1.25rem 2rem; text-align: center; color: var(--text-muted); font-size: 0.75rem; }
 
-        /* ── Scroll Animations ── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ── Keyframe Animations ── */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-15px);
-            }
-            to {
-                opacity: 0.4;
-                transform: translateY(0);
-            }
-        }
+        /* ── Animations ── */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 0.35; transform: translateY(0); } }
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
-            nav {
-                gap: 1.25rem;
-                padding: 1rem;
-            }
-
-            nav a {
-                font-size: 0.75rem;
-            }
-
-            .tech-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-cards {
-                grid-template-columns: 1fr;
-                max-width: 320px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                margin-left: 0 !important;
-                text-align: left !important;
-                padding-left: 2rem;
-            }
-
-            .timeline::before {
-                left: 0;
-            }
-
-            .timeline-dot {
-                left: 0 !important;
-                right: auto !important;
-                transform: translate(-50%, -50%) !important;
-            }
-
-            section {
-                padding: 4rem 1.25rem;
-            }
+            nav { gap: 1rem; padding: 0.85rem 1rem; flex-wrap: wrap; }
+            nav a { font-size: 0.7rem; }
+            .tech-grid { grid-template-columns: repeat(3, 1fr); }
+            .projects-grid, .blog-grid, .skills-grid { grid-template-columns: 1fr; }
+            .contact-cards { grid-template-columns: 1fr; max-width: 300px; }
+            .timeline-item { width: 100%; margin-left: 0 !important; text-align: left !important; padding-left: 1.5rem; }
+            .timeline::before { left: 0; }
+            .timeline-dot { left: 0 !important; right: auto !important; transform: translate(-50%, -50%) !important; }
+            .timeline-item:nth-child(odd) .exp-details li { justify-content: flex-start; }
+            .timeline-item:nth-child(odd) .exp-details li::before { order: 0; }
+            section { padding: 3.5rem 1.25rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .github-stats { gap: 1.5rem; }
+            .form-row-inline { grid-template-columns: 1fr; }
         }
-
-        @media (max-width: 480px) {
-            .tech-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        @media (max-width: 480px) { .tech-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- NAV -->
     <nav>
         <a href="#about">About</a>
         <a href="#stack">Stack</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#github">GitHub</a>
+        <a href="#blog">Blog</a>
         <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Hero -->
+    <!-- 1. HERO -->
     <section class="hero">
         <div class="hero-icon">
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -605,370 +227,293 @@
             </svg>
         </div>
         <h1>Jenry Eduardo</h1>
-        <p class="subtitle">Backend Developer</p>
-        <p class="tagline">Building scalable systems, robust APIs, and distributed architectures that power modern applications</p>
-        <a href="#contact" class="btn-outline">Get in Touch</a>
+        <p class="role">Software Engineer | <span>Backend Developer</span></p>
+        <p class="specialty">Specialized in scalable APIs, real-time services & cloud architectures</p>
+        <p class="tagline">Building robust systems, distributed architectures, and high-performance APIs that power modern applications and solve real-world problems.</p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                View Projects
+            </a>
+            <a href="#" class="btn-outline" id="downloadCV">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download CV
+            </a>
+            <a href="#contact" class="btn-outline">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 4 12 13 2 4"/></svg>
+                Contact Me
+            </a>
+        </div>
     </section>
 
-    <!-- About Me -->
+    <!-- 2. ABOUT ME -->
     <section id="about">
         <div class="reveal">
             <div class="section-title-left">
                 <div class="icon-box">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="4 17 10 11 4 5"/>
-                        <line x1="12" y1="19" x2="20" y2="19"/>
-                    </svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
                 </div>
                 About Me
             </div>
             <div class="about-content">
-                I'm a backend developer with expertise in designing and implementing scalable web services and APIs. My focus is on building robust microservices architectures, optimizing database performance, and creating efficient system designs that handle real-world complexity. I specialize in RESTful and real-time communication protocols, distributed systems, and cloud infrastructure that powers mission-critical applications.
+                I'm a software engineer with solid experience in designing and implementing scalable web services, RESTful APIs, and real-time communication systems. My focus is on building robust microservices architectures, optimizing database performance, and creating efficient system designs that handle real-world complexity. I specialize in backend development, distributed systems, and cloud infrastructure that powers mission-critical applications. I have collaborated on multidisciplinary projects including IoT wearable devices, clinic management platforms, and mobile banking applications — always delivering clean, maintainable, and production-ready code.
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack -->
+    <!-- 3. TECH STACK -->
     <section id="stack">
         <div class="reveal">
             <h2 class="section-title">Tech Stack</h2>
+            <p class="section-subtitle">Core technologies and tools I use to build scalable backend systems</p>
             <div class="tech-grid">
-                <!-- Node.js -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="4" y="6" width="24" height="16" rx="2"/>
-                            <line x1="4" y1="12" x2="28" y2="12"/>
-                            <line x1="16" y1="22" x2="16" y2="26"/>
-                            <line x1="10" y1="26" x2="22" y2="26"/>
-                        </svg>
-                    </div>
-                    <span>Node.js</span>
-                </div>
-                <!-- Python -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="10 8 16 4 22 8"/>
-                            <polyline points="10 24 16 28 22 24"/>
-                            <line x1="10" y1="8" x2="10" y2="24"/>
-                            <line x1="22" y1="8" x2="22" y2="24"/>
-                            <polyline points="14 12 18 16 14 20"/>
-                        </svg>
-                    </div>
-                    <span>Python</span>
-                </div>
-                <!-- Java -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="6" y="4" width="20" height="24" rx="3"/>
-                            <circle cx="16" cy="12" r="3"/>
-                            <line x1="10" y1="20" x2="22" y2="20"/>
-                            <line x1="10" y1="24" x2="18" y2="24"/>
-                        </svg>
-                    </div>
-                    <span>Java</span>
-                </div>
-                <!-- REST APIs -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M8 8 L8 24"/>
-                            <path d="M24 8 L24 24"/>
-                            <path d="M12 8 L12 24"/>
-                            <path d="M20 8 L20 24"/>
-                        </svg>
-                    </div>
-                    <span>REST APIs</span>
-                </div>
-                <!-- WebSockets -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="8" cy="8" r="3"/>
-                            <circle cx="24" cy="8" r="3"/>
-                            <circle cx="8" cy="24" r="3"/>
-                            <circle cx="24" cy="24" r="3"/>
-                            <line x1="11" y1="8" x2="21" y2="8"/>
-                            <line x1="8" y1="11" x2="8" y2="21"/>
-                            <line x1="24" y1="11" x2="24" y2="21"/>
-                            <line x1="11" y1="24" x2="21" y2="24"/>
-                            <line x1="11" y1="11" x2="21" y2="21"/>
-                            <line x1="21" y1="11" x2="11" y2="21"/>
-                        </svg>
-                    </div>
-                    <span>WebSockets</span>
-                </div>
-                <!-- Docker -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="4" y="14" width="24" height="12" rx="2"/>
-                            <rect x="8" y="8" width="6" height="6"/>
-                            <rect x="16" y="8" width="6" height="6"/>
-                            <rect x="12" y="2" width="6" height="6"/>
-                        </svg>
-                    </div>
-                    <span>Docker</span>
-                </div>
-                <!-- PostgreSQL -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <ellipse cx="16" cy="8" rx="10" ry="4"/>
-                            <path d="M6 8v8c0 2.2 4.5 4 10 4s10-1.8 10-4V8"/>
-                            <path d="M6 16v8c0 2.2 4.5 4 10 4s10-1.8 10-4v-8"/>
-                        </svg>
-                    </div>
-                    <span>PostgreSQL</span>
-                </div>
-                <!-- MongoDB -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 4 C12 8 8 14 8 20 C8 25 11.5 28 16 28 C20.5 28 24 25 24 20 C24 14 20 8 16 4Z"/>
-                            <line x1="16" y1="14" x2="16" y2="24"/>
-                        </svg>
-                    </div>
-                    <span>MongoDB</span>
-                </div>
-                <!-- AWS -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 20 C6 20 10 24 16 24 C22 24 26 20 26 20"/>
-                            <path d="M8 12 C10 8 13 6 16 6 C19 6 22 8 24 12"/>
-                            <path d="M16 6 L16 24"/>
-                        </svg>
-                    </div>
-                    <span>AWS</span>
-                </div>
-                <!-- Git -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="16" cy="6" r="3"/>
-                            <circle cx="8" cy="22" r="3"/>
-                            <circle cx="24" cy="22" r="3"/>
-                            <line x1="16" y1="9" x2="16" y2="14"/>
-                            <path d="M16 14 C16 18 8 18 8 19"/>
-                            <path d="M16 14 C16 18 24 18 24 19"/>
-                        </svg>
-                    </div>
-                    <span>Git</span>
-                </div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="10 8 16 4 22 8"/><polyline points="10 24 16 28 22 24"/><line x1="10" y1="8" x2="10" y2="24"/><line x1="22" y1="8" x2="22" y2="24"/><polyline points="14 13 18 16 14 19"/></svg></div><span>JavaScript</span></div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="3"/><path d="M11 12h10M11 16h7M11 20h10"/></svg></div><span>TypeScript</span></div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="3"/><ellipse cx="16" cy="16" rx="14" ry="6"/><ellipse cx="16" cy="16" rx="14" ry="6" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="14" ry="6" transform="rotate(-60 16 16)"/></svg></div><span>Python</span></div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="6" width="24" height="16" rx="2"/><line x1="4" y1="12" x2="28" y2="12"/><line x1="16" y1="22" x2="16" y2="26"/><line x1="10" y1="26" x2="22" y2="26"/></svg></div><span>Node.js</span></div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="10"/><circle cx="16" cy="16" r="3"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="16" y1="25" x2="16" y2="29"/><line x1="3" y1="16" x2="7" y2="16"/><line x1="25" y1="16" x2="29" y2="16"/></svg></div><span>React</span></div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="14" width="24" height="12" rx="2"/><rect x="8" y="8" width="6" height="6"/><rect x="16" y="8" width="6" height="6"/><rect x="12" y="2" width="6" height="6"/></svg></div><span>Docker</span></div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 20C6 20 10 24 16 24C22 24 26 20 26 20"/><path d="M8 12C10 8 13 6 16 6C19 6 22 8 24 12"/><line x1="16" y1="6" x2="16" y2="24"/></svg></div><span>AWS</span></div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="16" cy="8" rx="10" ry="4"/><path d="M6 8v8c0 2.2 4.5 4 10 4s10-1.8 10-4V8"/><path d="M6 16v8c0 2.2 4.5 4 10 4s10-1.8 10-4v-8"/></svg></div><span>PostgreSQL</span></div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4C12 8 8 14 8 20C8 25 11.5 28 16 28C20.5 28 24 25 24 20C24 14 20 8 16 4Z"/><line x1="16" y1="14" x2="16" y2="24"/></svg></div><span>MongoDB</span></div>
+                <div class="tech-card"><div class="tech-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="6" r="3"/><circle cx="8" cy="22" r="3"/><circle cx="24" cy="22" r="3"/><line x1="16" y1="9" x2="16" y2="14"/><path d="M16 14C16 18 8 18 8 19"/><path d="M16 14C16 18 24 18 24 19"/></svg></div><span>Git</span></div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Projects -->
+    <!-- 4. PROJECTS -->
     <section id="projects">
         <div class="reveal">
             <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Real-world projects showcasing problem-solving, technical depth, and impact</p>
             <div class="projects-grid">
-                <!-- VitalVest -->
                 <div class="project-card">
-                    <div class="project-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                    </div>
-                    <h3>Smart Wearable Vest</h3>
-                    <p>Personal safety wearable device with IoT integration and real-time backend monitoring</p>
-                    <div class="project-tags">
-                        <span>IoT</span>
-                        <span>Python</span>
-                        <span>WebSockets</span>
-                        <span>AWS</span>
-                    </div>
-                    <a href="https://github.com/jenryEduardo/API-VITALVEST" target="_blank" class="project-link">
-                        View Details
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12 5 19 12 12 19"/>
-                        </svg>
-                    </a>
+                    <div class="project-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <h3>API VitalVest</h3>
+                    <p class="project-problem">Problem: Real-time health monitoring for personal safety wearable devices</p>
+                    <p>Backend API for a smart wearable vest with IoT integration, real-time sensor data processing, and emergency alert systems via WebSocket connections.</p>
+                    <p class="project-role">Role: Backend Developer — API architecture, WS real-time layer & cloud deployment</p>
+                    <div class="project-impact"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Real-time monitoring with sub-second latency</div>
+                    <div class="project-tags"><span>IoT</span><span>Python</span><span>WebSockets</span><span>AWS</span></div>
+                    <a href="https://github.com/jenryEduardo/API-VITALVEST" target="_blank" class="project-link">View Repository <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
                 </div>
-
-                <!-- Clinica API -->
                 <div class="project-card">
-                    <div class="project-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                        </svg>
-                    </div>
+                    <div class="project-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
                     <h3>Clinica API MongoDB</h3>
-                    <p>Scalable RESTful API for clinic management with MongoDB backend and real-time data handling</p>
-                    <div class="project-tags">
-                        <span>Node.js</span>
-                        <span>MongoDB</span>
-                        <span>REST</span>
-                        <span>Docker</span>
-                    </div>
-                    <a href="https://github.com/jenryEduardo/clinica_api_mongoDB-" target="_blank" class="project-link">
-                        View Details
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12 5 19 12 12 19"/>
-                        </svg>
-                    </a>
+                    <p class="project-problem">Problem: Efficient clinic management with scalable data persistence</p>
+                    <p>RESTful API for clinic operations — patient records, appointments, and medical data management using MongoDB for flexible document storage.</p>
+                    <p class="project-role">Role: Full Backend — Database design, API endpoints & integration layer</p>
+                    <div class="project-impact"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Streamlined clinic operations for multiple platforms</div>
+                    <div class="project-tags"><span>Node.js</span><span>MongoDB</span><span>REST API</span><span>Docker</span></div>
+                    <a href="https://github.com/jenryEduardo/clinica_api_mongoDB-" target="_blank" class="project-link">View Repository <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
                 </div>
-
-                <!-- Atlas Bank -->
                 <div class="project-card">
-                    <div class="project-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M8 3H5a2 2 0 00-2 2v3"/>
-                            <path d="M21 8V5a2 2 0 00-2-2h-3"/>
-                            <path d="M3 16v3a2 2 0 002 2h3"/>
-                            <path d="M16 21h3a2 2 0 002-2v-3"/>
-                        </svg>
-                    </div>
+                    <div class="project-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
                     <h3>Atlas Bank Mobile App</h3>
-                    <p>Full-featured mobile banking application with secure transactions and modern UI</p>
-                    <div class="project-tags">
-                        <span>Mobile</span>
-                        <span>REST</span>
-                        <span>PostgreSQL</span>
-                        <span>Microservices</span>
-                    </div>
-                    <a href="https://github.com/jenryEduardo/ATLAS_BANK" target="_blank" class="project-link">
-                        View Details
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12 5 19 12 12 19"/>
-                        </svg>
-                    </a>
+                    <p class="project-problem">Problem: Secure and accessible mobile banking experience</p>
+                    <p>Full-featured mobile banking application with secure transaction processing, account management, real-time balance updates, and modern user interface.</p>
+                    <p class="project-role">Role: Full-Stack Mobile Developer — Architecture, API & UI implementation</p>
+                    <div class="project-impact"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>End-to-end encrypted transactions</div>
+                    <div class="project-tags"><span>Mobile</span><span>REST</span><span>PostgreSQL</span><span>Microservices</span></div>
+                    <a href="https://github.com/jenryEduardo/ATLAS_BANK" target="_blank" class="project-link">View Repository <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience -->
+    <!-- 5. EXPERIENCE -->
     <section id="experience">
         <div class="reveal">
             <h2 class="section-title">Experience</h2>
+            <div class="divider"></div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-card">
-                        <div class="year">2024 - Present</div>
+                        <div class="year">2024 — Present</div>
                         <h3>Senior Backend Engineer</h3>
                         <div class="company">Tech Solutions Inc.</div>
-                        <div class="description">Led development of microservices architecture serving 100K+ daily active users</div>
+                        <ul class="exp-details">
+                            <li>Led microservices architecture serving 100K+ daily users</li>
+                            <li>Designed RESTful APIs for cross-platform integration</li>
+                            <li>Implemented CI/CD pipelines reducing deploy time by 60%</li>
+                            <li>Optimized overall system performance by 30%</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-card">
-                        <div class="year">2022 - 2024</div>
+                        <div class="year">2022 — 2024</div>
                         <h3>Backend Developer</h3>
                         <div class="company">Cloud Services Co.</div>
-                        <div class="description">Designed and implemented RESTful APIs and real-time communication systems</div>
+                        <ul class="exp-details">
+                            <li>Built RESTful APIs using Node.js and Express</li>
+                            <li>Developed real-time systems with WebSockets</li>
+                            <li>Integrated cloud services on AWS infrastructure</li>
+                            <li>Worked in agile teams with sprint-based delivery</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-card">
-                        <div class="year">2020 - 2022</div>
+                        <div class="year">2020 — 2022</div>
                         <h3>Software Engineer</h3>
                         <div class="company">Innovation Labs</div>
-                        <div class="description">Built scalable backend infrastructure and optimized database performance</div>
+                        <ul class="exp-details">
+                            <li>Built scalable backend infrastructure from scratch</li>
+                            <li>Optimized database queries and performance</li>
+                            <li>Developed internal tools for process automation</li>
+                            <li>Contributed to open source backend libraries</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
+    <!-- 6. SKILLS -->
+    <section id="skills">
+        <div class="reveal">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">Organized by category for quick reference</p>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-list"><span>JavaScript</span><span>TypeScript</span><span>Python</span><span>Java</span><span>SQL</span></div>
+                </div>
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <div class="skill-list"><span>Express.js</span><span>NestJS</span><span>Django</span><span>React</span><span>React Native</span></div>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Cloud</h3>
+                    <div class="skill-list"><span>Git</span><span>Docker</span><span>AWS</span><span>CI/CD</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. GITHUB -->
+    <section id="github">
+        <div class="reveal">
+            <div class="github-section">
+                <div class="gh-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+                <h3>GitHub & Open Source</h3>
+                <p>Check out my repositories, contributions, and open source projects. I believe in building in public and sharing knowledge with the developer community.</p>
+                <div class="github-stats">
+                    <div class="stat"><div class="stat-value">15+</div><div class="stat-label">Repositories</div></div>
+                    <div class="stat"><div class="stat-value">3</div><div class="stat-label">Featured Projects</div></div>
+                    <div class="stat"><div class="stat-value">Active</div><div class="stat-label">Contributions</div></div>
+                </div>
+                <a href="https://github.com/jenryEduardo" target="_blank" class="btn-primary" style="display:inline-flex;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77"/></svg>
+                    Visit My GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. BLOG -->
+    <section id="blog">
+        <div class="reveal">
+            <h2 class="section-title">Technical Blog</h2>
+            <p class="section-subtitle">AWS tutorials and insights on cloud architecture</p>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-tag">AWS Tutorial</div>
+                    <h3>Deploying Microservices on AWS ECS with Fargate</h3>
+                    <p>Step-by-step guide to containerizing a Node.js backend and deploying it to AWS ECS using Fargate for serverless container management, including load balancing and auto-scaling.</p>
+                    <a href="#" class="read-more">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-tag">AWS Tutorial</div>
+                    <h3>Building Serverless REST APIs with Lambda & API Gateway</h3>
+                    <p>How to design and deploy a fully serverless API using AWS Lambda, API Gateway, and DynamoDB — from local development to production with CI/CD pipelines.</p>
+                    <a href="#" class="read-more">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-tag">AWS Tutorial</div>
+                    <h3>Real-Time Data Pipelines with AWS Kinesis & S3</h3>
+                    <p>Architecture and implementation of a real-time streaming pipeline using Kinesis for ingestion, Lambda for processing, and S3 for persistent analytics-ready storage.</p>
+                    <a href="#" class="read-more">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. CONTACT -->
     <section id="contact" class="contact-section">
         <div class="reveal">
             <h2>Let's Build Something Together</h2>
             <p class="contact-desc">I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out.</p>
             <div class="contact-cards">
                 <a href="mailto:jenryeduardo@example.com" class="contact-card">
-                    <div class="contact-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="4" width="20" height="16" rx="2"/>
-                            <polyline points="22 4 12 13 2 4"/>
-                        </svg>
-                    </div>
+                    <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 4 12 13 2 4"/></svg></div>
                     <div class="contact-label">Email</div>
                     <div class="contact-value">jenryeduardo@example.com</div>
                 </a>
                 <a href="https://github.com/jenryEduardo" target="_blank" class="contact-card">
-                    <div class="contact-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                        </svg>
-                    </div>
+                    <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
                     <div class="contact-label">GitHub</div>
                     <div class="contact-value">github.com/jenryEduardo</div>
                 </a>
                 <a href="https://linkedin.com/in/jenryeduardo" target="_blank" class="contact-card">
-                    <div class="contact-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                            <rect x="2" y="9" width="4" height="12"/>
-                            <circle cx="4" cy="4" r="2"/>
-                        </svg>
-                    </div>
+                    <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
                     <div class="contact-label">LinkedIn</div>
                     <div class="contact-value">linkedin.com/in/jenryeduardo</div>
                 </a>
             </div>
-
-            <div class="footer-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="16" y="16" width="32" height="32" rx="2" transform="rotate(45 32 32)"/>
-                    <rect x="22" y="22" width="20" height="20" rx="1" transform="rotate(45 32 32)"/>
-                </svg>
+            <div class="contact-form">
+                <div class="form-row form-row-inline">
+                    <div><label for="name">Name</label><input type="text" id="name" placeholder="Your name"></div>
+                    <div><label for="email">Email</label><input type="email" id="email" placeholder="your@email.com"></div>
+                </div>
+                <div class="form-row"><label for="subject">Subject</label><input type="text" id="subject" placeholder="Project inquiry, collaboration, etc."></div>
+                <div class="form-row"><label for="message">Message</label><textarea id="message" placeholder="Tell me about your project or idea..."></textarea></div>
+                <button class="form-submit" onclick="handleSubmit()">Send Message</button>
             </div>
+            <div class="footer-icon"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="16" y="16" width="32" height="32" rx="2" transform="rotate(45 32 32)"/><rect x="22" y="22" width="20" height="20" rx="1" transform="rotate(45 32 32)"/></svg></div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        &copy; 2026 Jenry Eduardo. Built with precision and attention to detail.
-    </footer>
+    <footer>&copy; 2026 Jenry Eduardo. Built with precision and attention to detail.</footer>
 
     <script>
-        // Scroll reveal animation
-        const revealElements = document.querySelectorAll('.reveal');
-
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        revealElements.forEach(el => observer.observe(el));
-
-        // Smooth scroll for nav links
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                const t = document.querySelector(link.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // Nav background on scroll
         const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(11, 17, 32, 0.95)';
-            } else {
-                nav.style.background = 'rgba(11, 17, 32, 0.85)';
-            }
+            nav.style.background = window.scrollY > 50 ? 'rgba(11,17,32,0.95)' : 'rgba(11,17,32,0.85)';
+        });
+
+        function handleSubmit() {
+            const n = document.getElementById('name').value;
+            const e = document.getElementById('email').value;
+            const s = document.getElementById('subject').value;
+            const m = document.getElementById('message').value;
+            if (!n || !e || !m) { alert('Please fill in all required fields.'); return; }
+            window.location.href = `mailto:jenryeduardo@example.com?subject=${encodeURIComponent(s||'Portfolio Contact')}&body=${encodeURIComponent(`From: ${n} (${e})\n\n${m}`)}`;
+        }
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
+            navLinks.forEach(l => { l.style.color = l.getAttribute('href') === '#' + current ? 'var(--text-primary)' : ''; });
         });
     </script>
 </body>
